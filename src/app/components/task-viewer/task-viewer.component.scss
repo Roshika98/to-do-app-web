@@ -1,0 +1,12 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.task-card {
+  width: 60%;
+  text-align: left;
+}
