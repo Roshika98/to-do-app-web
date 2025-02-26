@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { TaskService } from '../../services/task.service';
+import { Task, UpdateTask } from '../../interfaces/task';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-task-viewer',
@@ -13,51 +15,29 @@ import { TaskService } from '../../services/task.service';
   styleUrl: './task-viewer.component.scss',
 })
 export class TaskViewerComponent implements OnInit {
-  public taskList: any[] = [];
+  public taskList: Task[] = [];
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.taskList = [
-      {
-        id: 1,
-        title: 'Task 1',
-        description: 'This is task 1',
-        status: 'Pending',
-      },
-      {
-        id: 2,
-        title: 'Task 2',
-        description: 'This is task 2',
-        status: 'Pending',
-      },
-      {
-        id: 3,
-        title: 'Task 3',
-        description: 'This is task 3',
-        status: 'Pending',
-      },
-      {
-        id: 4,
-        title: 'Task 4',
-        description: 'This is task 4',
-        status: 'Pending',
-      },
-      {
-        id: 5,
-        title: 'Task 5',
-        description: 'This is task 5',
-        status: 'Pending',
-      },
-    ];
+    this.getAllTasks();
   }
 
-  public updateTaskStatus(task: any): void {
-    const index = this.taskList.findIndex((t) => t.id === task.id);
-    this.taskList[index].status = 'Completed';
+  public updateTaskStatus(taskId: string): void {
+    const updateAttrs: UpdateTask = { status: 'DONE' };
+    this.taskService.updateTask(updateAttrs, taskId).subscribe({
+      next: (response) => {
+        console.log('Task updated:', response);
+        this.getAllTasks();
+      },
+    });
   }
 
-  public getAllTasks() {
-    const taskRetriever = new Observable();
+  private getAllTasks() {
+    this.taskService.getTasks().subscribe({
+      next: (response) => {
+        this.taskList = response.data as Task[];
+      },
+    });
   }
 }

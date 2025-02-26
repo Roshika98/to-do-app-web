@@ -27,8 +27,8 @@ export class RequestService {
     return this.http.post<any>(`${environment.baseURI}${postEndpoint}`, body);
   }
 
-  public putData(putEndpoint: string, body: any): Observable<any> {
-    return this.http.put<any>(`${environment.baseURI}${putEndpoint}`, body);
+  public patchData(putEndpoint: string, body: any): Observable<any> {
+    return this.http.patch<any>(`${environment.baseURI}${putEndpoint}`, body);
   }
 
   public deleteData(deleteEndpoint: string): Observable<any> {

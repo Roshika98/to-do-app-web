@@ -10,7 +10,7 @@
       <p>{{ task.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="primary">Done</button>
+      <button mat-button color="primary" (click)="updateTaskStatus(taskList[$index].id)">Done</button>
     </mat-card-actions>
   </mat-card>
   }

@@ -1,1 +1,49 @@
-<p>task-creator works!</p>
+<div class="login-container">
+  <!-- <div class="image-section">
+    <img src="assets/images/login_page_img-removebg-preview.png" alt="Login Image" />
+  </div> -->
+  <div class="form-section">
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title class="card-title">Create Task</mat-card-title>
+        <mat-card-subtitle class="card-subtitle"
+          >Enter Task details to create a new task</mat-card-subtitle
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="taskForm">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title</mat-label>
+            <input formControlName="title" matInput type="text" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Due Date</mat-label>
+            <!-- <input formControlName="dueDate" matInput type="date" required /> -->
+            <input matInput [matDatepicker]="picker"  formControlName="dueDate"/>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <button
+            mat-flat-button
+            color="primary"
+            class="full-width"
+            (click)="createTask()"
+          >
+            Save Task
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
