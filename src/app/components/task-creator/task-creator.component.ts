@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   styleUrl: './task-creator.component.scss',
 })
 export class TaskCreatorComponent {
+  @Output() public taskCreated = new EventEmitter<void>();
   public taskForm: FormGroup;
 
   constructor(
@@ -41,24 +42,27 @@ export class TaskCreatorComponent {
   }
 
   public createTask(): void {
-    console.log('Task created:', this.taskForm.value);
-
     if (this.taskForm.valid) {
       const { dueDate, ...params } = this.taskForm.value;
       this.taskService
         .createTask({ ...params, dueDate: dueDate.toISOString() })
         .subscribe({
           next: (response) => {
-            this.taskForm.markAsPristine();
-            this.taskForm.markAsUntouched();
-            this.taskForm.reset();
-            this.taskForm.patchValue({
-              dueDate: new Date(),
-              title: '',
-              description: '',
-            });
+            this.resetForm();
+            this.taskCreated.emit();
           },
         });
     }
+  }
+
+  private resetForm() {
+    this.taskForm.markAsPristine();
+    this.taskForm.markAsUntouched();
+    this.taskForm.reset();
+    this.taskForm.patchValue({
+      dueDate: new Date(),
+      title: '',
+      description: '',
+    });
   }
 }

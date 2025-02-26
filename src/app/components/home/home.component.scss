@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+
+.left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.right {
+  flex: 1;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  // position: relative;
+}
+
+.task-viewer{
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media screen and (max-width: 768px) {
+  .left, .separator {
+    display: none;
+  }
+
+  .right {
+    flex: 1;
+  }
+}
