@@ -1,0 +1,66 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.password-options {
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.card-header{
+  // text-align: center;
+  width: 100%;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-bottom: 16px !important;
+}
+
+.card-title {
+  // text-align: center;
+  width: 100%;
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-bottom: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .image-section {
+    display: none;
+  }
+}
