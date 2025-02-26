@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import { Observable } from 'rxjs';
 import { TaskService } from '../../services/task.service';
 import { Task, UpdateTask } from '../../interfaces/task';
-import { FormGroup } from '@angular/forms';
 import { SharedTaskService } from '../../services/shared-task.service';
 
 @Component({
