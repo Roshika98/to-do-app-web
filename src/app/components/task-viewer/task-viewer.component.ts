@@ -34,7 +34,6 @@ export class TaskViewerComponent implements OnInit {
     const updateAttrs: UpdateTask = { status: 'DONE' };
     this.taskService.updateTask(updateAttrs, taskId).subscribe({
       next: (response) => {
-        console.log('Task updated:', response);
         this.getAllTasks();
       },
     });
