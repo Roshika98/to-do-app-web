@@ -11,6 +11,7 @@ import { TaskService } from '../../services/task.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedTaskService } from '../../services/shared-task.service';
 
 @Component({
   selector: 'app-task-creator',
@@ -27,12 +28,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   styleUrl: './task-creator.component.scss',
 })
 export class TaskCreatorComponent {
-  @Output() public taskCreated = new EventEmitter<void>();
   public taskForm: FormGroup;
 
   constructor(
     private formbuilder: FormBuilder,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private sharedTaskService: SharedTaskService
   ) {
     this.taskForm = this.formbuilder.group({
       title: ['', Validators.required],
@@ -49,7 +50,7 @@ export class TaskCreatorComponent {
         .subscribe({
           next: (response) => {
             this.resetForm();
-            this.taskCreated.emit();
+            this.sharedTaskService.triggerTaskRefresh();
           },
         });
     }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { TaskService } from '../../services/task.service';
 import { Task, UpdateTask } from '../../interfaces/task';
 import { FormGroup } from '@angular/forms';
+import { SharedTaskService } from '../../services/shared-task.service';
 
 @Component({
   selector: 'app-task-viewer',
@@ -17,9 +18,17 @@ import { FormGroup } from '@angular/forms';
 export class TaskViewerComponent implements OnInit {
   public taskList: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private sharedTaskService: SharedTaskService
+  ) {}
 
   ngOnInit(): void {
+    this.sharedTaskService.sharedTaskObservable.subscribe({
+      next: () => {
+        this.getAllTasks();
+      },
+    });
     this.getAllTasks();
   }
 
