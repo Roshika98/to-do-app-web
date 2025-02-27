@@ -12,6 +12,18 @@ export class LoginService {
     return this.requestService.login({ email: username, password });
   }
 
+  public signUp(
+    email: string,
+    name: string,
+    password: string
+  ): Observable<any> {
+    return this.requestService.postData('/auth/register', {
+      email,
+      name,
+      password,
+    });
+  }
+
   public regenerateAccessToken(refreshToken: string): Observable<any> {
     return this.requestService.postData('/auth/refresh', { refreshToken });
   }
