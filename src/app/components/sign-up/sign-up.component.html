@@ -2,16 +2,20 @@
   <div class="form-section">
     <mat-card>
       <mat-card-header class="card-header">
-        <mat-card-title class="card-title">Login</mat-card-title>
+        <mat-card-title class="card-title">Sign Up</mat-card-title>
         <mat-card-subtitle class="card-subtitle"
-          >Enter your credentials to login</mat-card-subtitle
+          >Enter your details to signup</mat-card-subtitle
         >
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="loginForm">
+        <form [formGroup]="signUpForm">
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>email</mat-label>
-            <input formControlName="username" matInput type="email" required />
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput required />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email" required />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
@@ -28,18 +32,10 @@
             mat-flat-button
             color="primary"
             class="full-width"
-            (click)="login()"
             type="button"
+            (click)="signUp()"
           >
-            Login
-          </button>
-          <button
-            mat-stroked-button
-            class="full-width"
-            (click)="switchToSignup()"
-            type="button"
-          >
-            signup
+            Sign Up
           </button>
         </form>
       </mat-card-content>

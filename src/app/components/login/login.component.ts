@@ -13,6 +13,8 @@ import {
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { AuthService } from '../../services/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +36,8 @@ export class LoginComponent {
     private formbuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbarService: SnackbarService
   ) {
     this.loginForm = this.formbuilder.group({
       username: ['', Validators.required],
@@ -50,10 +53,16 @@ export class LoginComponent {
         next: (response) => {
           const { access_token, refresh_token } = response.data;
           this.authService.storeTokens({ access_token, refresh_token });
+          this.snackbarService.showSuccess('Login Success');
           this.router.navigate(['/home']);
         },
-        error: (err) => {
+        error: (err: HttpErrorResponse) => {
           console.log(err);
+          if (err.status === 401) {
+            this.snackbarService.showError('Invalid username or password');
+          } else {
+            this.snackbarService.showError('Login Failed');
+          }
           // this.snackBarService.showError('Invalid username or password');
         },
       });
@@ -61,5 +70,9 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       this.loginForm.markAsDirty();
     }
+  }
+
+  public switchToSignup() {
+    this.router.navigate(['/signup']);
   }
 }
